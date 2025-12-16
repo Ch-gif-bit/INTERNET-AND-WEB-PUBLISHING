@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Black Suit</title>
+        <style>
+            /* 1. 移除 body 默认边距，并设置背景色和最小高度 */
+            body {
+                margin: 0;
+                padding: 0;
+                /* 将背景色设为白色，更符合正式西装的专业感，并避免与图片背景冲突 */
+                background-color: #84FF00; 
+                min-height: 100vh; 
+                font-family: Arial, sans-serif;
+                color: #333; /* 设置字体颜色为深灰色 */
+            }
+
+            /* 2. 主容器：使用 Flexbox 实现左右分栏 */
+            .product-container {
+                display: flex;
+                width: 100%;
+                min-height: 100vh;
+                align-items: stretch; /* 确保两侧高度一致 */
+            }
+
+            /* 3. 左侧：图片区域 (占据 50% 宽度) */
+            .image-column {
+                width: 50%;
+                /* 可选：如果图片有白色背景，可以不设置背景色 */
+                background-color: #f8f8f8; /* 略微偏灰，增加层次感 */
+            }
+            
+            /* 确保图片填满左侧容器 */
+            .image-column img {
+                width: 100%;
+                /* 关键：设置图片高度为视口高度，强制填满左侧 */
+                height: 100vh; 
+                object-fit: cover; /* 确保图片在填充空间时不会失真，会被裁剪 */
+                display: block;
+            }
+
+            /* 4. 右侧：文字信息区域 (占据 50% 宽度) */
+            .details-column {
+                width: 50%;
+                padding: 40px; 
+                box-sizing: border-box; 
+                /* 可以在右侧设置一个不同的背景色，以与左侧图片区域区分 */
+                /* background-color: #ffffff; */
+            }
+            
+            /* 5. 调整标题和列表的样式 */
+            .details-column h2 {
+                margin-top: 0;
+                font-size: 2em;
+            }
+            .details-column ul {
+                list-style-type: disc;
+                margin-left: 20px;
+            }
+            .details-column a {
+                color: #007bff; /* 设置链接颜色 */
+                font-weight: bold;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    
+    <body>
+
+        <div class="product-container">
+            
+            <div class="image-column">
+                <img src="balcksuit.png.jpeg" alt="Black Suit">
+            </div>
+
+            <div class="details-column">
+                
+                <h2>Black Suit</h2>
+
+                <p>
+                    <b>Material:</b> Premium Wool Blend<br>
+                    <b>Available Sizes:</b> S, M, L, XL<br>
+                    <b>Color:</b> Black
+                </p>
+
+                <p>
+                    This elegant black suit is perfect for formal occasions, business meetings, and special events. Designed to provide a sharp and professional look.
+                </p>
+                
+                <ul>
+                    <li>Modern slim-fit design</li>
+                    <li>Comfortable fit</li>
+                    <li>High-quality fabric</li>
+                </ul>
+
+                <a href="products.html">Back to Products</a>
+                
+                <br><br>
+
+                <iframe width="300" height="170"
+                src="https://www.youtube.com/embed/A9Uw5qyXRW4"
+                title="Black Suit Video"
+                allowfullscreen></iframe>
+            </div>
+            
+        </div>
+
+    </body>
+</html>
