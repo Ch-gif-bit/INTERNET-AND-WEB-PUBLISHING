@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elegant Dress</title>
+    <style>
+        /* 1. 移除默认边距，确保内容紧贴边缘 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #84FF00; 
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. 主容器：使用 Flex 布局实现左右 50/50 分割 */
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* 3. 左侧图片：占据一半宽度，高度覆盖全屏 */
+        .left-column {
+            width: 50%;
+            background-color: #eee; /* 图片未加载时的占位色 */
+        }
+
+        .left-column img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 保证图片在不失真的情况下填满左侧 */
+            display: block;
+        }
+
+        /* 4. 右侧内容：解决“太大”和“居中”的问题 */
+        .right-column {
+            width: 50%;
+            padding: 60px 40px; /* 增加顶部内边距，让文字从偏上方开始 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* 关键：文字不再居中，而是从顶部排列 */
+            align-items: flex-start; /* 内容左对齐 */
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* 5. 链接样式：与 T-shirt 页面保持一致 */
+        .back-link {
+            margin-top: 30px; /* 给链接上方留出明显的空隙 */
+            color: #0000EE; /* 经典的链接蓝色 */
+            font-weight: normal;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="left-column">
+            <img src="dress.png.webp" alt="Elegant Dress">
+        </div>
+
+        <div class="right-column">
+            <h2>Elegant Dress</h2>
+
+            <p>
+                <b>Material:</b> Chiffon Blend<br>
+                <b>Available Sizes:</b> S, M, L<br>
+                <b>Color:</b> Red, Black, Blue
+            </p>
+
+            <p>
+                This elegant dress is designed for special occasions and casual outings. 
+                It offers a stylish and comfortable fit for modern women.
+            </p>
+
+            <ul>
+                <li>Lightweight and breathable fabric</li>
+                <li>Elegant and modern design</li>
+                <li>Perfect for casual and semi-formal events</li>
+            </ul>
+
+                <a href="products.html">Back to Products</a>
+
+                <br><br>
+
+                <iframe width="300" height="170"
+                src="https://youtu.be/MasWyHs3shQ?si=o6koE_-LAxk1oWBR"
+                title="Dress Fashion Video"
+                allowfullscreen>
+        </div>
+
+    </div>
+
+</body>
+</html>
