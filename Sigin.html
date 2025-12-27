@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="styles/auth.css">
+        <link rel="stylesheet" href="styles/header.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <p class="home">Logo</p>
+            </div>
+            <div class="middle-section">
+                <p>Home</p>
+                <p>Shop</p>
+                <p>About</p>
+                <p>Contact</p>
+            </div>
+            <div class="right-section">
+                <a href="Signup.html" class="nav-link">
+                    <p class="Sign-Up">Sign Up</p>
+                </a>
+                <a href="Sigin.html" class="nav-link">
+                    <p class="Login">Login</p>
+                </a>
+                <div class="cart-container">
+                    <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                        <img src="images/shopping cart.png" class="Shopping-Cart">
+                        <div class="cart-number">0</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-container">
+        <form class="login-card">
+            <h2>Login</h2>
+            
+            <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Your email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye-slash icon-eye" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+
+            <button type="submit" class="btn-login">Login</button>
+
+            <p class="signup-text">Don't have an account? <a href="Signup.html">Sign Up</a></p>
+
+        </form>
+        </div>
+
+        <script>
+            const togglePassword = document.getElementById("togglePassword");
+            const passwordInput = document.getElementById("password");
+
+            togglePassword.addEventListener("click", function () {
+                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                passwordInput.setAttribute("type", type);
+                this.classList.toggle("fa-eye");
+                this.classList.toggle("fa-eye-slash");
+            });
+
+            document.querySelector('.login-card').addEventListener('submit', function (event) {
+                event.preventDefault();
+                alert("Login successful!");
+            });
+        </script>
+
+    </body>
+</html>

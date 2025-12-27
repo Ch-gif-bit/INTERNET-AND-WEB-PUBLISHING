@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Signup</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="styles/auth.css">
+      <link rel="stylesheet" href="styles/header.css">
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="left-section">
+          <p class="home">Logo</p>
+      </div>
+      <div class="middle-section">
+          <a href="Signup.html" class="nav-link">
+                    <p class="Sign-Up">Sign Up</p>
+                </a>
+          <p>Shop</p>
+          <p>About</p>
+          <p>Contact</p>
+      </div>
+      <div class="right-section">
+          <a href="Signup.html" class="nav-link">
+              <p class="Sign-Up">Sign Up</p>
+          </a>
+          <a href="Sigin.html" class="nav-link">
+              <p class="Login">Login</p>
+          </a>
+          <div class="cart-container">
+              <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                  <img src="images/shopping cart.png" class="Shopping-Cart">
+                  <div class="cart-number">0</div>
+              </a>
+          </div>
+      </div>
+    </div>
+
+    <div class="signup-container">
+      <form class="signup-card">
+        <h2>Sign Up</h2>
+        
+        <div class="input-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Your full name" required>
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Your email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fa-solid fa-eye-slash icon-eye" id="togglePassword"></i>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                <i class="fa-solid fa-eye-slash icon-eye" id="toggleConfirmPassword"></i>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-signup">Sign Up</button>
+        <p id="error-message" style="color: red; font-size: 14px; margin-top: 10px; display: none;"></p>
+
+        <p class="login-text">Already have an account? <a href="Sigin.html">Log In</a></p>
+
+      </form>
+    </div>
+    <script>
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const signupForm = document.querySelector('.signup-card');
+        const errorMessage = document.getElementById('error-message');
+        const toggleConfirm = document.getElementById("toggleConfirmPassword");
+        const confirmInput = document.getElementById("confirm-password");
+
+        togglePassword.addEventListener("click", function () {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+
+        toggleConfirm.addEventListener("click", function () {
+            const type = confirmInput.getAttribute("type") === "password" ? "text" : "password";
+            confirmInput.setAttribute("type", type);
+            this.classList.toggle("fa-eye");
+            this.classList.toggle("fa-eye-slash");
+        });
+
+        signupForm.addEventListener('submit', function (event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        if (password !== confirmPassword) {
+            event.preventDefault();
+
+            errorMessage.textContent = "Passwords do not match. Please try again.";
+            errorMessage.style.display = "block";
+
+            document.getElementById('confirm-password').style.borderColor = "red";
+        } else {
+            errorMessage.style.display = "none";
+            document.getElementById('confirm-password').style.borderColor = "#ccc";
+            alert("Account created successfully!"); 
+        }});
+    </script>
+
+
+  </body>
+
+</html>
