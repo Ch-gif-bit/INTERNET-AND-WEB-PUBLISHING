@@ -1,0 +1,76 @@
+.sidebar{
+    position:fixed;
+    display: inline-block;
+    top: 60px;
+    left: 0;
+    height: 4000px;
+    width: 240px;
+    background-color: white;
+    color: white;
+    margin-top: 20px;
+    z-index: 100;
+}
+
+.searchbar{
+    background-color: gray;
+    border-style: none;
+    height: 40px;
+    width: 180px;
+    margin-left: 15px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    border-radius: 20px;
+    padding-left: 20px;
+    display: inline-block;
+    
+}
+
+.searchbar::placeholder{
+    color: white;
+}
+
+.sideThings{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    border-top: solid;
+    border-top-width: 1px;
+    border-color: gray;
+    background: linear-gradient(to right, #2abfff, #0071ff);
+    color: white;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.sideThings::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    z-index: -2; /* Stays at the very bottom */
+}
+
+.sideThings::after{
+    content: '';
+    background: linear-gradient(to right, #6366f1 0%, #a855f7 100%);
+    width: 0px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: 150ms ease-in-out;
+}
+
+.sideThings:hover::after{
+    width: 100%;
+}
+
+.sideThings:hover{
+    color: black
+}

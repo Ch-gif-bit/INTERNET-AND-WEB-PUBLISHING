@@ -1,0 +1,112 @@
+.product-grid{
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    row-gap: 20px;
+    column-gap: 20px;
+    justify-content: center;
+    background-color: lightblue;
+    position: relative;
+}
+
+@media (max-width: 1500px){
+    .product-grid{
+        grid-template-columns: 250px 250px 250px;
+    }
+}
+
+@media (max-width:1099px){
+    .product-grid{
+        grid-template-columns: 250px 250px;
+    }
+}
+
+@media (max-width: 700px){
+    .product-grid{
+        grid-template-columns: 250px;
+    }
+}
+
+.product{
+    background-color: white;
+    height: 350px;
+    position: relative;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(176, 176, 176);
+    border-radius: 5px;
+}
+
+.lightpink{
+    background-color: white;
+    height: 350px;
+    width: 250px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+}
+
+.discount{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    background-color: purple;
+    color: white;
+    font-weight: 500;
+    font-weight: 600;
+}
+
+
+.itemcontainer{
+    position: relative;
+    background-color: white;
+}
+
+.item{
+    background-color: white;
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+}
+
+.itemcontainer .add{
+    position: absolute;
+    background-color: gray;
+    color: white;
+    bottom: 2px;
+    width: 250px;
+    text-align: center;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    opacity: 0;
+    font-weight: bold;
+}
+
+.itemcontainer:hover .add{
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.discountedprice{
+    color: rgb(84, 32, 133);
+    font-weight: bold;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.originalprice{
+    color: gray;
+    display: inline-block;
+    text-decoration: line-through;
+}
+
+.description{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.CurrentCategory{
+    font-size: 40px;
+    font-weight: 700;
+}
