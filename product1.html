@@ -1,63 +1,211 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Classic T-Shirt</title>
-        <style>
-            /* 统一设置图片的最大宽度，确保它能填充 50% 的容器 */
-            .product-image img {
-                width: 100%;
-                height: auto;
-                display: block; /* 移除图片底部的额外空白 */
-            }
-            /* 确保 body 元素没有默认的 padding/margin，避免出现缝隙 */
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #84FF00; /* 保持背景色 */
-                min-height: 100vh; /* 确保 body 至少占满视口高度 */
-            }
-        </style>
-    </head>
-    
-    <body>
+<head>
+    <title>Classic T-Shirt</title>
+    <style>
+        /* 1. 基础全局设置 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #84FF00; /* 亮绿色背景 */
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+        }
 
-        <div style="display: flex; width: 100%; min-height: 100vh;"> 
-            
-            <div class="product-image" style="width: 50%; background-color: lightgrey;">
-                <img src="T-S.png.webp" alt="Classic T-Shirt">
-            </div>
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh; /* 锁定高度，让左侧可以独立滑动 */
+        }
 
-            <div style="width: 50%; padding: 20px; box-sizing: border-box;">
-                
-                <h2>Classic T-Shirt</h2>
+        /* 2. 左侧：图片与视频垂直滚动列表 */
+        .left-column {
+            width: 50%;
+            height: 100vh;
+            overflow-y: scroll; /* 允许上下滑动 */
+            background-color: #f4f4f4;
+            scrollbar-width: none; /* 隐藏滚动条 (Firefox) */
+        }
+        .left-column::-webkit-scrollbar { display: none; } /* 隐藏滚动条 (Chrome) */
 
-                <p>
-                    <b>Material:</b> 100% Cotton<br>
-                    <b>Available Sizes:</b> S, M, L, XL<br>
-                    <b>Color:</b> Black, White, Grey
-                </p>
+        .left-column img, 
+        .left-column iframe {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+        
+        /* 确保影片和照片都有足够的高度来体现“滑动感” */
+        .left-column img {
+            height: 100vh; /* 照片占满一屏 */
+            object-fit: contain; /* 确保照片完整显示不被裁剪 */
+            background-color: #f4f4f4;
+        }
 
-                <p>
-                    This classic T-shirt is designed for comfort and style, suitable for all occasions.
-                </p>
+        .left-column iframe {
+            height: 100vh; /* 影片也占满一屏 */
+        }
 
-                <ul>
-                    <li>Soft fabric</li>
-                    <li>Easy to wash</li>
-                    <li>Unisex design</li>
-                </ul>
+        /* 3. 右侧：详情内容区域 */
+        .right-column {
+            width: 50%;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            background-color: #84FF00;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
 
-                 <a href="products.html">Back to Products</a>
-                
-                 <br><br>
+        .back-link {
+            text-decoration: underline;
+            color: black;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
 
-                <iframe width="300" height="170"
-                src="https://www.youtube.com/embed/Xdz09cSPOWI"
-                title="Classic T-Shirt Video"
-                allowfullscreen></iframe>
-            </div>
-            
+        h2 { font-size: 28px; margin: 0 0 10px 0; text-transform: uppercase; }
+
+        .price {
+            font-size: 20px;
+            color: #d0021b; /* 红色价格 */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        /* 4. Size 选择器按钮 */
+        .size-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .size-btn {
+            border: 1px solid black;
+            padding: 10px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 50px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s ease; /* 颜色切换更平滑 */
+        }
+        
+        /* 鼠标悬停时的微弱反馈 */
+        .size-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* 关键：被选中（变黑）的状态样式 */
+        .size-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+        /* 5. Add to Bag 黑色大按钮 */
+        .add-to-bag {
+            background: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .add-to-bag:hover {
+            opacity: 0.8;
+        }
+            ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .buy-now {
+            background: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .buy-now:hover {
+            opacity: 0.8;
+        }
+            ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="left-column">
+            <img src="T-S.png.webp" alt="Classic T-Shirt Front">
+            <img src="White.png.webp" alt="Classic T-Shirt Front">
+            <iframe src="https://www.youtube.com/embed/Xdz09cSPOWI" title="Classic T-Shirt Video" allowfullscreen></iframe>
         </div>
 
-    </body>
+        <div class="right-column">
+            
+            <a href="products.html" class="back-link">Back to Products</a>
+
+            <h2>Classic T-Shirt</h2>
+            <div class="price">RM 35.00</div>
+
+            <p>
+                <b>Material:</b> 100% Cotton<br>
+                <b>Color:</b> Black, White, Grey
+            </p>
+
+            <div class="section-title">Select Size</div>
+            <div class="size-options">
+                <div class="size-btn">S</div>
+                <div class="size-btn">M</div>
+                <div class="size-btn">L</div>
+                <div class="size-btn">XL</div>
+            </div>
+
+            <button class="add-to-bag">Add to Bag</button>
+            <button class="buy-now">Buy Now</button>
+
+            <div class="section-title">Description</div>
+            <p>This classic T-shirt is designed for comfort and style, suitable for all occasions.</p>
+            <ul>
+                <li>Soft fabric</li>
+                <li>Easy to wash</li>
+                <li>Unisex design</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const sizeButtons=document.querySelectorAll('.size-btn');
+        sizeButtons.forEach(button=>{
+            button.addEventListener('click',function(){// toggle 的作用是：有点选类名就删掉（变白），没有就加上（变黑）
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
 </html>
