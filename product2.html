@@ -1,92 +1,211 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Hoodie Jacket</title>
-        <style>
-            /* 1. 移除 body 默认边距，并设置背景色和最小高度 */
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #84FF00; /* 保持您想要的亮绿色背景 */
-                min-height: 100vh; /* 确保 body 至少占满视口高度，使左右两侧能拉伸 */
-                font-family: Arial, sans-serif; /* 建议添加字体以提高可读性 */
-            }
+<head>
+    <title>Hoodie Jacket</title>
+    <style>
+        /* 1. 全局样式：保持亮绿色背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #84FF00; 
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
 
-            /* 2. 主容器：使用 Flexbox 实现左右分栏 */
-            .product-container {
-                display: flex;
-                width: 100%;
-                min-height: 100vh; /* 确保容器高度等于视口高度 */
-            }
+        /* 2. 主容器 */
+        .product-container {
+            display: flex;
+            width: 100%;
+            height: 100vh; /* 锁定高度，让左侧可以独立滚动 */
+        }
 
-            /* 3. 左侧：图片区域 (占据 50% 宽度) */
-            .image-column {
-                width: 50%;
-                /* 可选：添加背景色方便观察，如果图片是透明的或有边框 */
-                /* background-color: #f0f0f0; */
-            }
+        /* 3. 左侧：图片与视频滚动区域 */
+        .image-column {
+            width: 50%;
+            height: 100vh;
+            overflow-y: scroll; /* 允许垂直滚动 */
+            background-color: #f4f4f4;
+            scrollbar-width: none; /* 隐藏火狐滚动条 */
+        }
+        .image-column::-webkit-scrollbar { display: none; } /* 隐藏 Chrome 滚动条 */
+
+        /* 确保左侧的图片和视频都占满宽度 */
+        .image-column img, 
+        .image-column iframe {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+
+        /* 强制照片和影片都占满整个屏幕高度，实现“一屏一划”的效果 */
+        .image-column img {
+            height: 100vh; 
+            object-fit: cover; /* 确保图片铺满 */
+        }
+        .image-column iframe {
+            height: 100vh; 
+        }
+
+        /* 4. 右侧：详情信息区域 */
+        .details-column {
+            width: 50%;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back-link {
+            text-decoration: underline;
+            color: black;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        h2 { 
+            font-size: 32px; 
+            margin: 0; 
+            text-transform: uppercase; 
+        }
+
+        .price {
+            font-size: 24px;
+            color: #d0021b; /* 红色价格 */
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* 5. 尺寸选择器按钮 */
+        .size-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .size-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .size-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* 关键：被选中（变黑）的状态样式 */
+        .size-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+
+        /* 6. Add to Bag 黑色大按钮 */
+        .add-to-bag {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .buy-now {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-container">
+        
+        <div class="image-column">
+            <img src="HOODIE.png" alt="Hoodie Jacket Front">
             
-            /* 确保图片填满左侧容器 */
-            .image-column img {
-                width: 100%;
-                height: 100vh; /* 设置图片高度为视口高度，强制填满左侧 */
-                object-fit: cover; /* 确保图片在填充空间时不会失真，会被裁剪 */
-                display: block;
-            }
-
-            /* 4. 右侧：文字信息区域 (占据 50% 宽度) */
-            .details-column {
-                width: 50%;
-                padding: 40px; /* 增加内边距，让文字与边缘有足够的间距 */
-                box-sizing: border-box; /* 确保 padding 不会使 50% 的宽度溢出 */
-            }
-            
-            /* 5. 调整标题的顶部边距，让内容更美观 */
-            .details-column h2 {
-                margin-top: 0;
-            }
-        </style>
-    </head>
-    
-    <body>
-
-        <div class="product-container">
-            
-            <div class="image-column">
-                <img src="HOODIE.png" alt="Hoodie Jacket">
-            </div>
-
-            <div class="details-column">
-                
-                <h2>Hoodie Jacket</h2>
-
-                <p>
-                    <b>Material:</b> Cotton Blend<br>
-                    <b>Available Sizes:</b> M, L, XL<br>
-                    <b>Color:</b> Black, Blue
-                </p>
-
-                <p>
-                    A trendy hoodie jacket suitable for casual and street fashion styles.
-                </p>
-                
-                <ul>
-                    <li>Warm and comfortable</li>
-                    <li>Modern design</li>
-                    <li>Durable material</li>
-                </ul>
-
-                <a href="products.html">Back to Products</a>
-                
-                <br><br>
-
-                <iframe width="300" height="170"
-                src="https://www.youtube.com/embed/c83VyPiBctE"
-                title="Hoodie Jacket Video"
-                allowfullscreen></iframe>
-            </div>
-            
+            <iframe src="https://www.youtube.com/embed/c83VyPiBctE" title="Hoodie Jacket Video" allowfullscreen></iframe>
         </div>
 
-    </body>
+        <div class="details-column">
+            
+            <a href="products.html" class="back-link">← Back to Products</a>
+
+            <h2>Hoodie Jacket</h2>
+            <div class="price">RM 129.00</div>
+
+            <p>
+                <b>Material:</b> Cotton Blend<br>
+                <b>Color:</b> Black, Blue
+            </p>
+
+            <span class="label">Select Size</span>
+            <div class="size-options">
+                <div class="size-btn">M</div>
+                <div class="size-btn">L</div>
+                <div class="size-btn">XL</div>
+            </div>
+
+            <button class="add-to-bag">Add to Bag</button>
+            <button class="buy-now">Buy Now</button>
+            
+            <span class="label">Product Description</span>
+            <p>
+                A trendy hoodie jacket suitable for casual and street fashion styles.
+            </p>
+            
+            <ul>
+                <li>Warm and comfortable</li>
+                <li>Modern design</li>
+                <li>Durable material</li>
+            </ul>
+
+        </div>
+        
+    </div>
+
+    <script>
+
+        const sizeButtons=document.querySelectorAll('.size-btn');
+        sizeButtons.forEach(button=>{
+            button.addEventListener('click',function(){// toggle 的作用是：有点选类名就删掉（变白），没有就加上（变黑）
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
 </html>
