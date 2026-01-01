@@ -1,108 +1,223 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Black Suit</title>
-        <style>
-            /* 1. 移除 body 默认边距，并设置背景色和最小高度 */
-            body {
-                margin: 0;
-                padding: 0;
-                /* 将背景色设为白色，更符合正式西装的专业感，并避免与图片背景冲突 */
-                background-color: #84FF00; 
-                min-height: 100vh; 
-                font-family: Arial, sans-serif;
-                color: #333; /* 设置字体颜色为深灰色 */
-            }
+<head>
+    <title>Black Suit</title>
+    <style>
+        /* 1. 全局样式：保持亮绿色背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #84FF00; 
+            min-height: 100vh; 
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
 
-            /* 2. 主容器：使用 Flexbox 实现左右分栏 */
-            .product-container {
-                display: flex;
-                width: 100%;
-                min-height: 100vh;
-                align-items: stretch; /* 确保两侧高度一致 */
-            }
+        /* 2. 主容器 */
+        .product-container {
+            display: flex;
+            width: 100%;
+            height: 100vh; /* 锁定高度，让左侧可以独立滚动 */
+        }
 
-            /* 3. 左侧：图片区域 (占据 50% 宽度) */
-            .image-column {
-                width: 50%;
-                /* 可选：如果图片有白色背景，可以不设置背景色 */
-                background-color: #f8f8f8; /* 略微偏灰，增加层次感 */
-            }
+        /* 3. 左侧：图片与视频滚动区域 */
+        .image-column {
+            width: 50%;
+            height: 100vh;
+            overflow-y: scroll; /* 允许垂直滚动 */
+            background-color: #f8f8f8;
+            scrollbar-width: none; /* 隐藏滚动条 (Firefox) */
+        }
+        .image-column::-webkit-scrollbar { display: none; } /* 隐藏滚动条 (Chrome) */
+
+        /* 确保左侧内容铺满 */
+        .image-column img, 
+        .image-column iframe {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+
+        /* 设置高度为 100vh，实现一屏一张图/一个影片的整洁滑动感 */
+        .image-column img {
+            height: 100vh; 
+            object-fit: cover; 
+        }
+        .image-column iframe {
+            height: 100vh; 
+        }
+
+        /* 4. 右侧：详情信息区域 (参考 DRUM 设计) */
+        .details-column {
+            width: 50%;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .back-link {
+            text-decoration: underline;
+            color: black;
+            font-size: 13px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h2 { 
+            font-size: 32px; 
+            margin: 0; 
+            text-transform: uppercase; 
+        }
+
+        /* 红色价格 */
+        .price {
+            font-size: 24px;
+            color: #d0021b; 
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* 5. 尺寸选择器按钮 (方框设计) */
+        .size-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .size-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .size-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* 关键：被选中（变黑）的状态样式 */
+        .size-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+
+        /* 6. Add to Bag 黑色大按钮 */
+        .add-to-bag {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .add-to-bag:hover {
+            opacity: 0.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .buy-now {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .buy-now:hover {
+            opacity: 0.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-container">
+        
+        <div class="image-column">
+            <img src="balcksuit.png.jpeg" alt="Black Suit">
             
-            /* 确保图片填满左侧容器 */
-            .image-column img {
-                width: 100%;
-                /* 关键：设置图片高度为视口高度，强制填满左侧 */
-                height: 100vh; 
-                object-fit: cover; /* 确保图片在填充空间时不会失真，会被裁剪 */
-                display: block;
-            }
-
-            /* 4. 右侧：文字信息区域 (占据 50% 宽度) */
-            .details-column {
-                width: 50%;
-                padding: 40px; 
-                box-sizing: border-box; 
-                /* 可以在右侧设置一个不同的背景色，以与左侧图片区域区分 */
-                /* background-color: #ffffff; */
-            }
-            
-            /* 5. 调整标题和列表的样式 */
-            .details-column h2 {
-                margin-top: 0;
-                font-size: 2em;
-            }
-            .details-column ul {
-                list-style-type: disc;
-                margin-left: 20px;
-            }
-            .details-column a {
-                color: #007bff; /* 设置链接颜色 */
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
-    </head>
-    
-    <body>
-
-        <div class="product-container">
-            
-            <div class="image-column">
-                <img src="balcksuit.png.jpeg" alt="Black Suit">
-            </div>
-
-            <div class="details-column">
-                
-                <h2>Black Suit</h2>
-
-                <p>
-                    <b>Material:</b> Premium Wool Blend<br>
-                    <b>Available Sizes:</b> S, M, L, XL<br>
-                    <b>Color:</b> Black
-                </p>
-
-                <p>
-                    This elegant black suit is perfect for formal occasions, business meetings, and special events. Designed to provide a sharp and professional look.
-                </p>
-                
-                <ul>
-                    <li>Modern slim-fit design</li>
-                    <li>Comfortable fit</li>
-                    <li>High-quality fabric</li>
-                </ul>
-
-                <a href="products.html">Back to Products</a>
-                
-                <br><br>
-
-                <iframe width="300" height="170"
-                src="https://www.youtube.com/embed/A9Uw5qyXRW4"
-                title="Black Suit Video"
-                allowfullscreen></iframe>
-            </div>
-            
+            <iframe src="https://www.youtube.com/embed/A9Uw5qyXRW4" title="Black Suit Video" allowfullscreen></iframe>
         </div>
 
-    </body>
+        <div class="details-column">
+            
+            <a href="products.html" class="back-link">← Back to Products</a>
+
+            <h2>Black Suit</h2>
+            <div class="price">RM 599.00</div> <p>
+                <b>Material:</b> Premium Wool Blend<br>
+                <b>Color:</b> Black
+            </p>
+
+            <span class="label">Select Size</span>
+            <div class="size-options">
+                <div class="size-btn">S</div>
+                <div class="size-btn">M</div>
+                <div class="size-btn">L</div>
+                <div class="size-btn">XL</div>
+            </div>
+
+            <button class="add-to-bag">Add to Bag</button>
+            <button class="buy-now">Buy Now</button>
+            
+            <span class="label">Product Description</span>
+            <p>
+                This elegant black suit is perfect for formal occasions, business meetings, and special events. Designed to provide a sharp and professional look.
+            </p>
+            
+            <ul>
+                <li>Modern slim-fit design</li>
+                <li>Comfortable fit</li>
+                <li>High-quality fabric</li>
+            </ul>
+
+            </div>
+        
+    </div>
+
+    <script>
+
+        const sizeButtons=document.querySelectorAll('.size-btn');
+        sizeButtons.forEach(button=>{
+            button.addEventListener('click',function(){// toggle 的作用是：有点选类名就删掉（变白），没有就加上（变黑）
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
 </html>
