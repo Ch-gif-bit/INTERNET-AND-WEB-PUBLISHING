@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checkout - Shipping</title>
+    <link rel="stylesheet" href="styles/checkout.css"> 
+    <link rel="stylesheet" href="styles/cart.css">
+    <link rel="stylesheet" href="styles/header.css">
+</head>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <p class="home">Logo</p>
+        </div>
+        <div class="middle-section">
+            <a href="index.html" class="nav-link"><p class="Home">Home</p></a>
+            <p>Shop</p>
+            <p>About</p>
+            <p>Contact</p>
+        </div>
+        <div class="right-section">
+            <a href="Signup.html" class="nav-link"><p class="Sign-Up">Sign Up</p></a>
+            <a href="Sigin.html" class="nav-link"><p class="Login">Login</p></a>
+            <div class="cart-container">
+                <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="images/shopping cart.png" class="Shopping-Cart">
+                    <div class="cart-number">0</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-spacer" style="height: 80px;"></div>
+
+    <div class="checkout-wrapper">
+        <div class="checkout-steps">
+            <div class="step active"><span>1</span> Shipping</div>
+            <div class="step"><span>2</span> Billing</div>
+            <div class="step"><span>3</span> Review</div>
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-left">
+                <div class="white-card">
+                    <h2>Shipping Address</h2>
+                    <div class="name-row">
+                        <input type="text" id="fname" placeholder="First Name*">
+                        <input type="text" id="lname" placeholder="Last Name*">
+                    </div>
+                    <input type="text" id="addr1" placeholder="Address Line 1*">
+                    <input type="text" id="addr2" placeholder="Address Line 2">
+                    
+                    <div class="city-row">
+                        <select id="country" onchange="updateStates()">
+                            <option value="" disabled selected>Select Country*</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="United States">United States</option>
+                        </select>
+                    </div>
+
+                    <div class="postcode-row">
+                        <select id="state">
+                            <option value="">State</option>
+                        </select>
+                        <input type="text" id="postcode" placeholder="Postcode*">
+                    </div>
+                    
+                    <input type="text" id="phone" placeholder="Phone Number*">
+                    
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="make-default" checked> Make Default
+                    </label>
+
+                    <button class="primary-black-btn" onclick="goToBilling()">
+                        CONTINUE TO BILLING INFORMATION
+                    </button>
+                </div>
+            </div>
+
+            <div class="checkout-right">
+                <div class="white-card summary-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-line">
+                        <span>Items</span>
+                        <span id="items-count">0</span>
+                    </div>
+                    <div class="summary-line total-line">
+                        <span>Total</span>
+                        <span id="grand-total">RM 0.00</span>
+                    </div>
+                    <hr>
+                    <h3>Order Details</h3>
+                    <div id="checkout-item-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/checkout-shipping.js"></script>
+</body>
+</html>
