@@ -93,6 +93,81 @@ function handleLogout() {
         window.location.href = "index.html";
     }
 }
+function createOrder(cartItems, shippingDetails) {
+    const currentEmail = localStorage.getItem('currentUserEmail');
+    if (!currentEmail) return null;
+
+    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+    const userIndex = allUsers.findIndex(u => u.email === currentEmail);
+
+    if (userIndex !== -1) {
+        // 1. 封裝訂單數據
+        const newOrder = {
+            orderId: "ORD-" + Date.now(), // 使用時間戳產生簡易唯一 ID
+            date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+            items: cartItems,
+            total: cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+            status: "Processing", // 預設狀態
+            shipping: shippingDetails
+        };
+
+        // 2. 存入該用戶的 orders 陣列
+        if (!allUsers[userIndex].orders) {
+            allUsers[userIndex].orders = [];
+        }
+        allUsers[userIndex].orders.unshift(newOrder); // 最新的訂單排在最前面
+
+        // 3. 核心動作：清空該用戶的購物車
+        allUsers[userIndex].cart = []; 
+
+        // 4. 儲存回資料庫
+        localStorage.setItem('allUsers', JSON.stringify(allUsers));
+        
+        // 5. 更新 Header 的購物車數字 (因為現在變 0 了)
+        const cartNumberElement = document.querySelector('.cart-number');
+        if (cartNumberElement) cartNumberElement.textContent = 0;
+
+        return newOrder; // 回傳訂單物件供後續顯示
+    }
+    return null;
+}
+
+// 1. 負責尋找產品資料
+function recordAndView(productId) {
+    // 從你之前初始化的 allProducts 中找資料
+    const allProducts = JSON.parse(localStorage.getItem('allProducts')) || [];
+    const product = allProducts.find(p => p.id === productId);
+    
+    if (product) {
+        console.log("正在記錄瀏覽歷史:", product.name);
+        addToHistory(product); // 執行儲存動作
+        
+        // 如果你有產品詳情頁，取消下面這行的註解
+        // window.location.href = `product-details.html?id=${productId}`; 
+    } else {
+        console.error("找不到產品資料，請確認 localStorage 中的 allProducts 是否正確");
+    }
+}
+
+// 2. 負責存入 localStorage
+function addToHistory(product) {
+    const currentEmail = localStorage.getItem('currentUserEmail');
+    let historyKey = currentEmail ? `history_${currentEmail}` : 'guestHistory';
+    
+    let history = JSON.parse(localStorage.getItem(historyKey)) || [];
+
+    // 移除重複並置頂
+    history = history.filter(item => item.id !== product.id);
+    history.unshift({
+        ...product,
+        viewedAt: new Date().getTime()
+    });
+
+    // 限制 10 筆
+    if (history.length > 10) history.pop();
+
+    localStorage.setItem(historyKey, JSON.stringify(history));
+}
 
 // --- 5. 立即執行初始化 ---
 // 注意：這兩行現在放在最外層，不需要等頁面圖片下載
@@ -119,7 +194,7 @@ window.addEventListener('load', function() {
         button.addEventListener('click', function() {
             const productId = this.getAttribute('data-id'); 
             if (!productId) return;
-
+            recordAndView(productId);
             const allProducts = JSON.parse(localStorage.getItem('allProducts')) || [];
             const productInfo = allProducts.find(p => p.id === productId);
             if (!productInfo) return;
