@@ -3,7 +3,7 @@ window.onload = function() {
     loadReviewData();
 };
 
-// 1. 統一的獲取購物車函數 (與 Checkout 一致)
+// 1. 統一獲取購物車函數
 function getCartData() {
     const currentEmail = localStorage.getItem('currentUserEmail');
     if (currentEmail) {
@@ -17,7 +17,7 @@ function getCartData() {
 
 // 2. 渲染右側訂單總結
 function renderSummary() {
-    const cart = getCartData(); // 使用統一獲取邏輯
+    const cart = getCartData();
     const detailsContainer = document.getElementById('checkout-item-details');
     const itemsCountElement = document.getElementById('items-count');
     const totalElement = document.getElementById('grand-total');
@@ -31,13 +31,12 @@ function renderSummary() {
     cart.forEach(item => {
         const price = parseFloat(item.price) || 0;
         const qty = parseInt(item.quantity) || 0;
-        
         total += (price * qty);
         count += qty;
         
         detailsContainer.innerHTML += `
-            <div class="order-detail-item">
-                <img src="${item.image}" width="60">
+            <div class="order-detail-item" style="display:flex; gap:10px; margin-bottom:10px;">
+                <img src="${item.image}" width="60" style="object-fit:cover;">
                 <div>
                     <strong>${item.name}</strong><br>
                     <span>Qty: ${qty}</span><br>
@@ -50,20 +49,20 @@ function renderSummary() {
     if (totalElement) totalElement.textContent = `RM ${total.toFixed(2)}`;
 }
 
-// 3. 加載地址與支付信息 (保持不變)
+// 3. 加載地址與支付資訊
 function loadReviewData() {
     const shipping = JSON.parse(localStorage.getItem('shippingAddress'));
     const shippingBox = document.getElementById('review-shipping-info');
     
-    if (shipping) {
+    if (shipping && shippingBox) {
         shippingBox.innerHTML = `
             <strong>${shipping.fname} ${shipping.lname}</strong><br>
             ${shipping.addr1}${shipping.addr2 ? ', ' + shipping.addr2 : ''}<br>
             ${shipping.postcode} ${shipping.state}, ${shipping.country}<br>
             Phone: ${shipping.phone}
         `;
-    } else {
-        if (shippingBox) shippingBox.textContent = "No shipping information found.";
+    } else if (shippingBox) {
+        shippingBox.textContent = "No shipping information found.";
     }
 
     const payment = localStorage.getItem('paymentMethod');
@@ -73,31 +72,36 @@ function loadReviewData() {
     }
 }
 
-// 4. 完成訂單：清除對應的購物車
+// 4. 完成訂單：建立記錄並清除購物車 (保留這一個版本就好)
 function completeOrder() {
+    const cart = getCartData();
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
     if (!confirm("Confirm to place order?")) return;
 
     const currentEmail = localStorage.getItem('currentUserEmail');
+    const shipping = JSON.parse(localStorage.getItem('shippingAddress'));
 
     if (currentEmail) {
-        // 會員下單：清除 allUsers 裡該用戶的 cart
-        let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
-        const userIndex = allUsers.findIndex(u => u.email === currentEmail);
-        if (userIndex !== -1) {
-            allUsers[userIndex].cart = []; // 清空購物車
-            localStorage.setItem('allUsers', JSON.stringify(allUsers));
+        // 調用 common.js 裡的建立訂單功能
+        const orderResult = createOrder(cart, shipping);
+        if (!orderResult) {
+            alert("Error creating order.");
+            return;
         }
+        alert(`Order successful! Your Order ID is: ${orderResult.orderId}`);
+        window.location.href = "orders.html";
     } else {
-        // 遊客下單：清除 guestCart
+        alert("Thank you for your guest order!");
         localStorage.removeItem('guestCart');
+        window.location.href = "index.html";
     }
 
-    // 清除公共暫存資訊
+    // 清除暫存資訊
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
-    // 為了保險，也清除舊的 myCart (如果有的話)
     localStorage.removeItem('myCart');
-
-    alert("Thank you! Your order has been placed successfully.");
-    window.location.href = "index.html";
 }
