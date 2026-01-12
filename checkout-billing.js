@@ -1,9 +1,9 @@
 window.onload = function() {
     renderSummary();
-    loadReviewData();
+    // 移除 loadReviewData(); 因為 Billing 頁面通常不需要顯示之前的 Review
 };
 
-// 1. 統一的獲取購物車函數 (與 Checkout 一致)
+// 1. 獲取購物車資料
 function getCartData() {
     const currentEmail = localStorage.getItem('currentUserEmail');
     if (currentEmail) {
@@ -15,23 +15,22 @@ function getCartData() {
     }
 }
 
-// 2. 渲染右側訂單總結
+// 2. 渲染右側訂單總結 (保持不變)
 function renderSummary() {
-    const cart = getCartData(); // 使用統一獲取邏輯
+    const cart = getCartData();
     const detailsContainer = document.getElementById('checkout-item-details');
     const itemsCountElement = document.getElementById('items-count');
     const totalElement = document.getElementById('grand-total');
     
-    let total = 0;
-    let count = 0;
-
     if (!detailsContainer) return;
 
+    let total = 0;
+    let count = 0;
     detailsContainer.innerHTML = '';
+    
     cart.forEach(item => {
         const price = parseFloat(item.price) || 0;
         const qty = parseInt(item.quantity) || 0;
-        
         total += (price * qty);
         count += qty;
         
@@ -50,54 +49,22 @@ function renderSummary() {
     if (totalElement) totalElement.textContent = `RM ${total.toFixed(2)}`;
 }
 
-// 3. 加載地址與支付信息 (保持不變)
-function loadReviewData() {
-    const shipping = JSON.parse(localStorage.getItem('shippingAddress'));
-    const shippingBox = document.getElementById('review-shipping-info');
+/**
+ * 3. 關鍵功能：儲存付款方式並跳轉
+ * 請確保你的 HTML 按鈕寫的是 onclick="savePaymentAndNext()"
+ */
+function savePaymentAndNext() {
+    // 獲取選中的 Radio 按鈕 (假設你的 HTML 裡付款方式的 name="payment")
+    const selectedPayment = document.querySelector('input[name="payment"]:checked');
     
-    if (shipping) {
-        shippingBox.innerHTML = `
-            <strong>${shipping.fname} ${shipping.lname}</strong><br>
-            ${shipping.addr1}${shipping.addr2 ? ', ' + shipping.addr2 : ''}<br>
-            ${shipping.postcode} ${shipping.state}, ${shipping.country}<br>
-            Phone: ${shipping.phone}
-        `;
-    } else {
-        if (shippingBox) shippingBox.textContent = "No shipping information found.";
+    if (!selectedPayment) {
+        alert("Please select a payment method.");
+        return;
     }
 
-    const payment = localStorage.getItem('paymentMethod');
-    const paymentBox = document.getElementById('review-payment-info');
-    if (paymentBox) {
-        paymentBox.innerHTML = `<strong>${payment || 'Not selected'}</strong>`;
-    }
-}
+    // 儲存選擇到 localStorage
+    localStorage.setItem('paymentMethod', selectedPayment.value);
 
-// 4. 完成訂單：清除對應的購物車
-function completeOrder() {
-    if (!confirm("Confirm to place order?")) return;
-
-    const currentEmail = localStorage.getItem('currentUserEmail');
-
-    if (currentEmail) {
-        // 會員下單：清除 allUsers 裡該用戶的 cart
-        let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
-        const userIndex = allUsers.findIndex(u => u.email === currentEmail);
-        if (userIndex !== -1) {
-            allUsers[userIndex].cart = []; // 清空購物車
-            localStorage.setItem('allUsers', JSON.stringify(allUsers));
-        }
-    } else {
-        // 遊客下單：清除 guestCart
-        localStorage.removeItem('guestCart');
-    }
-
-    // 清除公共暫存資訊
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
-    // 為了保險，也清除舊的 myCart (如果有的話)
-    localStorage.removeItem('myCart');
-
-    alert("Thank you! Your order has been placed successfully.");
-    window.location.href = "index.html";
+    // 跳轉到最後一頁 Review
+    window.location.href = "checkout-review.html";
 }
