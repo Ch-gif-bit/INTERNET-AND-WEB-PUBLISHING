@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles/auth.css"> 
+    <link rel="stylesheet" href="styles/cart.css">
+    <link rel="stylesheet" href="styles/header.css">
+</head>
+<body>
+    <div class="header">
+            <div class="left-section">
+                <p class="home">Logo</p>
+            </div>
+            <div class="middle-section">
+                <a href="index.html" class="nav-link">
+                    <p class="Home">Home</p>
+                </a>
+                <p>Shop</p>
+                <p>About</p>
+                <p>Contact</p>
+            </div>
+            <div class="right-section">
+                <a href="Signup.html" class="nav-link">
+                    <p class="Sign-Up">Sign Up</p>
+                </a>
+                <a href="Sigin.html" class="nav-link">
+                    <p class="Login">Login</p>
+                </a>
+                <div class="cart-container">
+                    <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                        <img src="images/shopping cart.png" class="Shopping-Cart">
+                        <div class="cart-number">0</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <div class="header-spacer" style="height: 80px;"></div>
+    
+    <div class="cart-page-container">
+        <div class="cart-card">
+            <h1>Shopping Cart</h1>
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-table-body">
+                    </tbody>
+            </table>
+
+            <div class="cart-footer">
+                <div class="promo-section">
+                    <h3>Promotion Code</h3>
+                    <div class="promo-input-group">
+                        <input type="text" placeholder="Coupon code">
+                        <button class="apply-btn">APPLY</button>
+                    </div>
+                </div>
+
+                <div class="totals-section">
+                    <h3>Cart Totals</h3>
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal-amount">RM 0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total</span>
+                        <span id="final-total">RM 0.00</span>
+                    </div>
+                    <button class="checkout-btn" onclick="location.href='checkout-shipping.html'">
+                        PROCEED TO CHECKOUT
+                    </button>           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/cart.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>
