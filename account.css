@@ -1,0 +1,158 @@
+/* 全局背景色 */
+body {
+    background-color: #f7f7f7;
+    margin: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.account-wrapper {
+    display: flex;
+    max-width: 1000px;
+    margin: 40px auto;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+/* 側邊欄設計 */
+.account-sidebar {
+    width: 240px;
+    background: white;
+    padding: 20px 0;
+    border-radius: 4px;
+    height: fit-content;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.account-sidebar h3 {
+    font-size: 13px;
+    color: #999;
+    padding: 0 20px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.account-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.account-sidebar li {
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    transition: 0.2s;
+}
+
+.account-sidebar li:hover {
+    background-color: #f0f0f0;
+}
+
+.account-sidebar li.active {
+    background-color: #eee;
+    font-weight: bold;
+    border-left: 4px solid #000;
+}
+
+.logout-link {
+    color: #d9534f !important;
+}
+
+/* 右側卡片設計 */
+.account-main {
+    flex: 1;
+}
+
+.info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.card-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.edit-link-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 資料網格 */
+.info-group {
+    margin-bottom: 25px;
+}
+
+.info-group label {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.info-group p {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.lock-hint {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 5px;
+    display: block;
+}
+
+/* 彈窗樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    align-items: center; justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 350px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn { background: black; color: white; border: none; padding: 10px 20px; cursor: pointer; flex: 1; }
+.cancel-btn { background: #eee; border: none; padding: 10px 20px; cursor: pointer; flex: 1; }

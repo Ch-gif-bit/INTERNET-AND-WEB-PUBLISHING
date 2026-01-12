@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browsing History</title>
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/account.css">
+    <link rel="stylesheet" href="styles/history.css">
+</head>
+<body>
+    
+     <div class="header">
+        <div class="left-section">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <p class="home">Logo</p>
+            </a>
+        </div>
+        <div class="middle-section">
+            <a href="index.html" class="nav-link"><p>Home</p></a>
+            <p>Shop</p>
+            <p>About</p>
+            <p>Contact</p>
+        </div>
+        <div class="right-section">
+            <div class="cart-container">
+                <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="images/shopping cart.png" class="Shopping-Cart">
+                    <div class="cart-number">0</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="header-spacer" style="height: 80px;"></div>
+
+    <div class="account-wrapper">
+        <aside class="account-sidebar">
+            <h3>MY ACCOUNT</h3>
+            <ul>
+                <a href="user-details.html" style="text-decoration: none; color: inherit;">
+                    <li >Account Information</li>
+                </a>
+                
+                <a href="history.html" style="text-decoration: none; color: inherit;">
+                    <li class="active">Browsing History</li>
+                </a>
+                
+                <a href="orders.html" style="text-decoration: none; color: inherit;">
+                    <li>My Orders</li>
+                </a>
+                <a href="wishlist.html" style="text-decoration: none; color: inherit;">
+                    <li>Wishlist</li>
+                </a>
+                <li onclick="handleLogout()" class="logout-link">Logout</li>
+            </ul>
+        </aside>
+
+        <main class="account-main">
+            <div class="info-card">
+                <div class="card-header">
+                    <h2>Recently Viewed</h2>
+                    <button class="clear-all-btn" onclick="clearMyHistory()">Clear All</button>
+                </div>
+                <div id="history-list" class="history-grid">
+                    </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

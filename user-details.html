@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details | My Project</title>
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/account.css">
+    <style>
+        /* 這裡放一些額外的微調，確保佈局完美 */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header-spacer {
+            height: 80px; /* 確保內容不被 Header 擋住 */
+        }
+        .logout-link {
+            color: #ff4d4d !important; /* 登出按鈕顯示紅色 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <p class="home">Logo</p>
+            </a>
+        </div>
+        <div class="middle-section">
+            <a href="index.html" class="nav-link"><p>Home</p></a>
+            <p>Shop</p>
+            <p>About</p>
+            <p>Contact</p>
+        </div>
+        <div class="right-section">
+            <div class="cart-container">
+                <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="images/shopping cart.png" class="Shopping-Cart">
+                    <div class="cart-number">0</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <div class="account-wrapper">
+        <aside class="account-sidebar">
+            <h3>MY ACCOUNT</h3>
+            <ul>
+                <a href="user-details.html" style="text-decoration: none; color: inherit;">
+                    <li class="active">Account Information</li>
+                </a>
+                
+                <a href="history.html" style="text-decoration: none; color: inherit;">
+                    <li >Browsing History</li>
+                </a>
+                
+                <a href="orders.html" style="text-decoration: none; color: inherit;">
+                    <li>My Orders</li>
+                </a>
+                <a href="wishlist.html" style="text-decoration: none; color: inherit;">
+                    <li>Wishlist</li>
+                </a>
+                <li onclick="handleLogout()" class="logout-link">Logout</li>
+            </ul>
+        </aside>
+
+        <main class="account-main">
+            <div class="info-card">
+                <div class="card-header">
+                    <h2>Personal Details</h2>
+                    <button class="edit-link-btn" onclick="openEditModal()">Edit</button>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-group">
+                        <label>Linked Email Address (User ID)</label>
+                        <p id="display-email">Loading...</p>
+                        <span class="lock-hint">🔒 This email is permanently linked to your account.</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Full Name</label>
+                        <p id="display-username">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label>Phone Number</label>
+                        <p id="display-phone">Not set</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Personal Details</h3>
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" id="edit-name" placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" id="edit-phone" placeholder="Enter your phone">
+            </div>
+            <div class="modal-actions">
+                <button onclick="closeEditModal()" class="cancel-btn">Cancel</button>
+                <button onclick="saveProfile()" class="save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/account.js"></script>
+    
+</body>
+</html>
