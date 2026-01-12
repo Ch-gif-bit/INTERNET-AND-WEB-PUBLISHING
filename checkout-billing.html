@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checkout - Billing</title>
+    <link rel="stylesheet" href="styles/checkout.css"> 
+    <link rel="stylesheet" href="styles/header.css">
+</head>
+<body>
+    <div class="header">
+        <div class="left-section"><p class="home">Logo</p></div>
+        <div class="middle-section">
+            <a href="index.html" class="nav-link"><p>Home</p></a>
+            <p>Shop</p><p>About</p><p>Contact</p>
+        </div>
+        <div class="right-section">
+            <div class="cart-container">
+                <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="images/shopping cart.png" class="Shopping-Cart">
+                    <div class="cart-number">0</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-spacer" style="height: 80px;"></div>
+
+    <div class="checkout-wrapper">
+        <div class="checkout-steps">
+            <div class="step"><span>1</span> Shipping</div>
+            <div class="step active"><span>2</span> Billing</div>
+            <div class="step"><span>3</span> Review</div>
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-left">
+                <div class="white-card">
+                    <h2>Payment Method</h2>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">All transactions are secure and encrypted.</p>
+
+                    <div class="payment-options">
+                        <div class="payment-item">
+                            <input type="radio" name="payment" id="credit-card" value="Credit Card" checked onclick="togglePaymentFields()">
+                            <label for="credit-card"><strong>Credit / Debit Card</strong></label>
+                        </div>
+                        
+                        <div id="card-inputs" class="payment-details-box">
+                            <input type="text" id="card-num" placeholder="Card Number (16 digits)">
+                            <div class="name-row">
+                                <input type="text" id="card-exp" placeholder="MM / YY">
+                                <input type="password" id="card-cvv" placeholder="CVV">
+                            </div>
+                        </div>
+
+                        <div class="payment-item">
+                            <input type="radio" name="payment" id="tng" value="Touch n Go" onclick="togglePaymentFields()">
+                            <label for="tng"><strong>Touch 'n Go eWallet</strong></label>
+                        </div>
+
+                        <div class="payment-item">
+                            <input type="radio" name="payment" id="fpx" value="Online Banking" onclick="togglePaymentFields()">
+                            <label for="fpx"><strong>Online Banking (FPX)</strong></label>
+                        </div>
+                    </div>
+
+                    <button class="primary-black-btn" style="margin-top: 30px;" onclick="savePaymentAndNext()">
+                        CONTINUE TO REVIEW
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 15px;">
+                        <a href="checkout-shipping.html" style="color: #888; text-decoration: none; font-size: 14px;">← Back to Shipping</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="checkout-right">
+                <div class="white-card summary-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-line">
+                        <span>Items</span>
+                        <span id="items-count">0</span>
+                    </div>
+                    <div class="summary-line total-line">
+                        <span>Total</span>
+                        <span id="grand-total">RM 0.00</span>
+                    </div>
+                    <hr>
+                    <h3>Order Details</h3>
+                    <div id="checkout-item-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/checkout-billing.js"></script>
+</body>
+</html>
