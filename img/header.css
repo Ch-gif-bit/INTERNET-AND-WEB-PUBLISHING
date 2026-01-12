@@ -1,0 +1,251 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom-style:solid ;
+    border-color: rgb(203, 203, 203);
+    border-width: 1px;
+}
+
+.left-section{
+    margin-left: 30px;
+    width: 200px;
+}
+
+
+.middle-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.search-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.search-button{
+    height: 40px;
+    border-style: none;
+    border-radius: 4px;
+    margin-left: -40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.bar{
+    width: 350px;
+    border-radius: 4px;
+    border-style: none;
+    height: 40px;
+    padding-left: 10px;
+
+}
+
+.bar::placeholder{
+    font-size: 14px;
+    border-style: none;
+}
+
+.bar:active{
+    border-style: none;
+}
+
+.right-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+    width: 200px;
+
+}
+
+.Sign-Up{
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 4px; 
+}
+
+.Sign-Up:hover{
+    border-color: white;
+    background-color: white;
+    color: rgb(161, 65, 250);
+    transition: 0.15s;
+}
+
+.Sign-Up:active{
+    opacity: 0.4;
+}
+
+.Login{
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.Login:hover{
+    color: rgb(161, 65, 250);
+    transition: 0.15s;
+}
+
+.Login:active{
+opacity: 0.4;
+}
+
+.cart-container {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+}
+
+.Shopping-Cart{
+    width: 30px;
+    height: 30px;
+    display: block;
+    display: block;
+}
+
+.cart-number{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    padding-bottom: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0px;
+    border-radius: 10px;
+    color: white;
+}
+
+.right-section a {
+    text-decoration: none;
+    color: inherit; 
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.middle-section a {
+    text-decoration: none;
+    color: inherit; 
+    display: flex;
+    align-items: center;
+}
+
+.Home{
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.Home:hover{
+    color: rgb(161, 65, 250);
+    transition: 0.15s;
+}
+
+/* 用戶容器 */
+.user-dropdown-container {
+    position: relative; /* 讓下拉選單相對於這個容器定位 */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+    padding: 5px 0;
+}
+
+/* 觸發區塊（頭像+名字） */
+.user-info-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-info-trigger img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 下拉選單主體 */
+.dropdown-menu {
+    display: none; /* 預設隱藏 */
+    position: absolute;
+    top: 100%; /* 出現在觸發區塊的下方 */
+    left: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 4px;
+    padding: 10px 0;
+    border: 1px solid #eee;
+}
+
+/* 重點：當滑鼠指向容器時，顯示選單 */
+.user-dropdown-container:hover .dropdown-menu {
+    display: block;
+}
+
+/* 選單內的選項 */
+.dropdown-menu a {
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+/* 分隔線 */
+.dropdown-menu hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 5px 0;
+}
+
+/* 登出按鈕顏色 */
+.logout-item {
+    color: #e74c3c !important;
+}

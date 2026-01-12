@@ -1,0 +1,176 @@
+body {
+    background-color: #f6f6f6;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    color: #333;
+}
+
+.checkout-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.checkout-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 40px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.step span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    color: #000;
+}
+
+.step.active span {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+}
+
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr; 
+    gap: 30px;
+    align-items: start;
+}
+
+.white-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.white-card h2 {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+input[type="text"], 
+input[type="password"],
+select, 
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; 
+    outline: none;
+}
+
+input:focus {
+    border-color: #000;
+}
+
+.name-row, .city-row, .postcode-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.primary-black-btn {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    padding: 18px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.primary-black-btn:hover {
+    background-color: #333;
+}
+
+/* 6. 右側訂單摘要 (Order Summary) */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.total-line {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #eee;
+}
+
+/* 商品細節清單 */
+.order-detail-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.order-detail-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+}
+
+/* 7. 複選框樣式 */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* 支付選項專用 */
+.payment-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.2s;
+}
+
+.payment-item:hover {
+    border-color: #999;
+}
