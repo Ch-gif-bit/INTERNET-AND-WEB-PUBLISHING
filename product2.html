@@ -3,33 +3,32 @@
 <head>
     <title>Hoodie Jacket</title>
     <style>
-        /* 1. 全局样式：保持亮绿色背景 */
+        
         body {
             margin: 0;
             padding: 0;
-            background-color: #84FF00; 
+            background-color: white; 
             min-height: 100vh;
             font-family: Arial, sans-serif;
         }
 
-        /* 2. 主容器 */
+        
         .product-container {
             display: flex;
             width: 100%;
-            height: 100vh; /* 锁定高度，让左侧可以独立滚动 */
+            height: 100vh; 
         }
 
-        /* 3. 左侧：图片与视频滚动区域 */
         .image-column {
             width: 50%;
             height: 100vh;
-            overflow-y: scroll; /* 允许垂直滚动 */
+            overflow-y: scroll; 
             background-color: #f4f4f4;
-            scrollbar-width: none; /* 隐藏火狐滚动条 */
+            scrollbar-width: none; 
         }
-        .image-column::-webkit-scrollbar { display: none; } /* 隐藏 Chrome 滚动条 */
+        .image-column::-webkit-scrollbar { display: none; } 
 
-        /* 确保左侧的图片和视频都占满宽度 */
+        
         .image-column img, 
         .image-column iframe {
             width: 100%;
@@ -37,16 +36,16 @@
             border: none;
         }
 
-        /* 强制照片和影片都占满整个屏幕高度，实现“一屏一划”的效果 */
+
         .image-column img {
             height: 100vh; 
-            object-fit: cover; /* 确保图片铺满 */
+            object-fit: cover;
         }
         .image-column iframe {
             height: 100vh; 
         }
 
-        /* 4. 右侧：详情信息区域 */
+     
         .details-column {
             width: 50%;
             padding: 60px 40px;
@@ -70,7 +69,7 @@
 
         .price {
             font-size: 24px;
-            color: #d0021b; /* 红色价格 */
+            color: #d0021b;
             font-weight: bold;
             margin: 10px 0 30px 0;
         }
@@ -84,7 +83,31 @@
             display: block;
         }
 
-        /* 5. 尺寸选择器按钮 */
+        .color-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .color-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .color-btn:hover {
+            background: #f0f0f0;
+        }
+
+
+        .color-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+
+
         .size-options {
             display: flex;
             gap: 12px;
@@ -103,13 +126,13 @@
             background: #f0f0f0;
         }
 
-        /* 关键：被选中（变黑）的状态样式 */
+
         .size-btn.selected {
             background: black !important;
             color: white !important;
         }
 
-        /* 6. Add to Bag 黑色大按钮 */
+
         .add-to-bag {
             background: black;
             color: white;
@@ -156,8 +179,13 @@
     <div class="product-container">
         
         <div class="image-column">
-            <img src="HOODIE.png" alt="Hoodie Jacket Front">
-            
+            <img src="Hoodie.png" alt="Hoodie Jacket Front">
+            <img src="BlackGrey Color-block.jpg" alt="BlackGrey Color-block Hoodie">
+            <img src="Green_Hoodie.webp" alt="Green Hoodie">
+            <img src="squid_pinkcolor.webp" alt="squid pinkcolor Hoodie">
+            <img src="Blue.webp" alt="Blue Hoodie">
+            <img src="Oran_Yell Hoodie.jpg" alt="Orange Yellow Hoodie">
+            <img src="White_Hoodie.webp" alt="White Hoodie">
             <iframe src="https://www.youtube.com/embed/c83VyPiBctE" title="Hoodie Jacket Video" allowfullscreen></iframe>
         </div>
 
@@ -166,18 +194,31 @@
             <a href="products.html" class="back-link">← Back to Products</a>
 
             <h2>Hoodie Jacket</h2>
-            <div class="price">RM 129.00</div>
+            <div class="price">RM 80.00</div>
 
             <p>
                 <b>Material:</b> Cotton Blend<br>
                 <b>Color:</b> Black, Blue
             </p>
 
+            <span class="label">Select Color</span>
+            <div class="color-options">
+                <div class="color-btn">Black</div>
+                <div class="color-btn">BlackGrey Color-block</div>
+                <div class="color-btn">Green Hoodie</div>
+                <div class="color-btn">Pink Squid</div>
+                <div class="color-btn">Blue Hoodie</div>
+                <div class="color-btn">Orange Yellow</div>
+                <div class="color-btn">White Hoodie</div>
+            </div>
+
             <span class="label">Select Size</span>
             <div class="size-options">
+                <div class="size-btn">S</div>
                 <div class="size-btn">M</div>
                 <div class="size-btn">L</div>
                 <div class="size-btn">XL</div>
+                <div class="size-btn">2XL</div>
             </div>
 
             <button class="add-to-bag">Add to Bag</button>
@@ -199,10 +240,23 @@
     </div>
 
     <script>
+        // 核心进化：颜色按钮只能单选
+        const colorButtons = document.querySelectorAll('.color-btn');
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 先移除所有颜色按钮的 'selected' 类
+                colorButtons.forEach(btn => btn.classList.remove('selected'));
+                // 给当前点击的按钮加上 'selected' 类
+                this.classList.add('selected');
+            });
+        });
+    </script>
+    <script>            
 
         const sizeButtons=document.querySelectorAll('.size-btn');
         sizeButtons.forEach(button=>{
-            button.addEventListener('click',function(){// toggle 的作用是：有点选类名就删掉（变白），没有就加上（变黑）
+            button.addEventListener('click',function(){
+                sizeButtons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.toggle('selected');
             });
         });
