@@ -7,7 +7,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #84FF00; 
+            background-color: white; 
             min-height: 100vh;
             font-family: Arial, sans-serif;
         }
@@ -86,7 +86,29 @@
             margin-bottom: 10px;
             display: block;
         }
+        .color-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .color-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .color-btn:hover {
+            background: #f0f0f0;
+        }
 
+
+        .color-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
         /* 5. 尺寸选择器按钮 (模仿右图的方框设计) */
         .size-options {
             display: flex;
@@ -169,7 +191,12 @@
         
         <div class="left-column">
             <img src="dress.png.webp" alt="Elegant Dress">
-            
+            <img src="waist slimming dress.webp" alt="Elegant Dress">
+            <img src="short_red dress.jpg" alt="Short Red Dress">
+            <img src="evening-gown.webp" alt="Evening Gown">
+            <img src="Elegant Evening Dress.webp" alt="Elegant Dress">
+            <img src="Sunnydaysweety.webp" alt="Sunnydaysweety">
+            <img src="muslim_dress.jpg" alt="Muslim Dress">
             <iframe src="https://www.youtube.com/embed/MasWyHs3shQ" title="Dress Fashion Video" allowfullscreen></iframe>
         </div>
 
@@ -183,11 +210,23 @@
                 <b>Color:</b> Red, Black, Blue
             </p>
 
+             <span class="label">Select Color</span>
+            <div class="color-options">
+                <div class="color-btn">red</div>
+                <div class="color-btn">Dusty Pink</div>
+                <div class="color-btn">Green</div>
+                <div class="color-btn">Champagne Gold</div>
+                <div class="color-btn">Silver Grey</div>
+                <div class="color-btn">Pearl Pink</div>
+            </div>
+
             <span class="label">Select Size</span>
             <div class="size-options">
                 <div class="size-btn">S</div>
                 <div class="size-btn">M</div>
                 <div class="size-btn">L</div>
+                <div class="size-btn">XL</div>
+                <div class="size-btn">2XL</div>
             </div>
 
             <button class="add-to-bag">Add to Bag</button>
@@ -208,12 +247,25 @@
             </div>
         
     </div>
+    <script>
+        // 核心进化：颜色按钮只能单选
+        const colorButtons = document.querySelectorAll('.color-btn');
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 先移除所有颜色按钮的 'selected' 类
+                colorButtons.forEach(btn => btn.classList.remove('selected'));
+                // 给当前点击的按钮加上 'selected' 类
+                this.classList.add('selected');
+            });
+        });
+    </script>
 
     <script>
 
         const sizeButtons=document.querySelectorAll('.size-btn');
         sizeButtons.forEach(button=>{
             button.addEventListener('click',function(){// toggle 的作用是：有点选类名就删掉（变白），没有就加上（变黑）
+                sizeButtons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.toggle('selected');
             });
         });
