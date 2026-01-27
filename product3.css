@@ -1,0 +1,183 @@
+/* product3.css */
+
+/* 1. 全局样式：保持亮绿色背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white; 
+            min-height: 100vh; 
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* 2. 主容器 */
+        .product-container {
+            display: flex;
+            width: 100%;
+            height: 100vh; /* 锁定高度，让左侧可以独立滚动 */
+        }
+
+        /* 3. 左侧：图片与视频滚动区域 */
+        .image-column {
+            width: 50%;
+            height: 100vh;
+            overflow-y: scroll; /* 允许垂直滚动 */
+            background-color: #f8f8f8;
+            scrollbar-width: none; /* 隐藏滚动条 (Firefox) */
+        }
+        .image-column::-webkit-scrollbar { display: none; } /* 隐藏滚动条 (Chrome) */
+
+        /* 确保左侧内容铺满 */
+        .image-column img, 
+        .image-column iframe {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+
+        /* 设置高度为 100vh，实现一屏一张图/一个影片的整洁滑动感 */
+        .image-column img {
+            height: 100vh; 
+            object-fit: cover; 
+        }
+        .image-column iframe {
+            height: 100vh; 
+        }
+
+        /* 4. 右侧：详情信息区域 (参考 DRUM 设计) */
+        .details-column {
+            width: 50%;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .back-link {
+            text-decoration: underline;
+            color: black;
+            font-size: 13px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h2 { 
+            font-size: 32px; 
+            margin: 0; 
+            text-transform: uppercase; 
+        }
+
+        /* 红色价格 */
+        .price {
+            font-size: 24px;
+            color: #d0021b; 
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .color-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .color-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .color-btn:hover {
+            background: #f0f0f0;
+        }
+
+
+        .color-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+        /* 5. 尺寸选择器按钮 (方框设计) */
+        .size-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .size-btn {
+            border: 1px solid black;
+            padding: 12px 20px;
+            background: white;
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .size-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* 关键：被选中（变黑）的状态样式 */
+        .size-btn.selected {
+            background: black !important;
+            color: white !important;
+        }
+
+        /* 6. Add to Bag 黑色大按钮 */
+        .add-to-bag {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .add-to-bag:hover {
+            opacity: 0.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .buy-now {
+            background: black;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .buy-now:hover {
+            opacity: 0.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
